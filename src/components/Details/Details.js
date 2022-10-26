@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 
 const Details = () => {
@@ -13,7 +13,7 @@ const Details = () => {
             <Card className='w-75 mx-auto'>
                 <Card.Img variant="top" src={detail.img} />
                 <Card.Body>
-                    <button className='btn btn-success mb-2'>Premium Course</button>
+                    <button className='btn btn-success mb-2'><Link className='text-decoration-none text-white' to='/checkout'>Get Premium Access</Link></button>
                     <Card.Text>
                         <p><small>{detail.description}</small></p>
                     </Card.Text>
