@@ -4,21 +4,21 @@ import { ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const SideBar = () => {
-    const [categories, setCategories] = useState([]);
+    const [courses, setCourses] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/course-categories')
+        fetch('http://localhost:5000/courses')
             .then(res => res.json())
-            .then(data => setCategories(data))
+            .then(data => setCourses(data))
     }, [])
 
     return (
         <div>
-            <h2>this is side effect {categories.length}</h2>
+            <h2>this is side effect {courses.length}</h2>
             {
-                categories.map(category => <p key={category.id}>
+                courses.map(course => <p key={course.id}>
                     <ListGroup>
-                        <ListGroup.Item><Link className='text-decoration-none' to={`/category/${category.id}`}>{category.name}</Link></ListGroup.Item>
+                        <ListGroup.Item><Link className='text-decoration-none' to={`/courses/${course.id}`}>{course.name}</Link></ListGroup.Item>
                     </ListGroup>
                 </p>)
             }
