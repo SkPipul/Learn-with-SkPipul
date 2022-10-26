@@ -1,13 +1,18 @@
 import React from 'react';
 
-const Login = () => {
-    const handleSubmit = () =>{
-
-    }
+const Register = () => {
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <div className='w-50 mx-auto my-5 border-0 p-5 rounded shadow'>
-                <h3>Login</h3>
+                <h3>Please Register</h3>
+                <div className="my-3">
+                    <label className='mb-2'>Enter your full name</label>
+                    <input
+                        type="name"
+                        className="form-control"
+                        placeholder="Enter name"
+                    required />
+                </div>
                 <div className="my-3">
                     <label className='mb-2'>Email address</label>
                     <input
@@ -38,7 +43,7 @@ const Login = () => {
                 </div>
                 <div className="">
                     <button type="submit" className="btn btn-primary mb-2 px-5">
-                        Login
+                        Register
                     </button>
                 </div>
                 <p className="forgot-password text-right">
@@ -49,4 +54,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

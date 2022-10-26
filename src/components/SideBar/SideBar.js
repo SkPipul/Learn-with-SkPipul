@@ -13,8 +13,8 @@ const SideBar = () => {
     }, [])
 
     return (
-        <div>
-            <h2>this is side effect {courses.length}</h2>
+        <div className='position-sticky top-0'>
+            <h3 className='text-center my-3 fw-bolder text-primary'>Course list</h3>
             {
                 courses.map(course => <p key={course.id}>
                     <ListGroup>

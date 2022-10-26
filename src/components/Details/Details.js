@@ -1,15 +1,25 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
 
 const Details = () => {
     const detail = useLoaderData().details;
 
     console.log(detail);
     return (
-        <div className='container'>
-            <img className='w-100 mt-5 mb-2' src={detail.img} alt="" />
-            <p>{detail.description}</p>
-        </div>
+        <div className='container  mt-3 mb-2'>
+            <h3 className='text-center mb-3 fw-bold text-success'>{detail.name}</h3>
+
+            <Card className='w-75 mx-auto'>
+                <Card.Img variant="top" src={detail.img} />
+                <Card.Body>
+                    <button className='btn btn-success mb-2'>Premium Course</button>
+                    <Card.Text>
+                        <p><small>{detail.description}</small></p>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+        </div >
     );
 };
 
