@@ -1,5 +1,6 @@
+import { getAuth, updateProfile } from 'firebase/auth';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../UserContext/UserContext';
@@ -7,14 +8,18 @@ import { AuthContext } from '../UserContext/UserContext';
 
 const Register = () => {
     const {createUser} = useContext(AuthContext); 
+    const auth = getAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
+        const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
         const confirm = form.confirm.value;
+        console.log(photoURL);
 
         if (password.length < 6) {
             // setError("Password should be 6 character or more")
@@ -37,25 +42,47 @@ const Register = () => {
             const user = result.user;
             console.log(user);
             form.reset();
+            navigate('/')
+            updateUserName(name, photoURL);
         })
         .catch( error => {
             toast.error(error)
             console.error(error);
         })
-
+        
     }
+
+    const updateUserName = (name, photoURL) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photoURL
+        })
+        .then(() => console.log('display name updated'))
+        .catch(error => console.error(error))
+  
+    }
+
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className='w-50 mx-auto my-5 border-0 p-5 rounded shadow'>
+            <div className='w-50 mx-auto my-5 border-0 p-5 rounded shadow bg-light'>
                 <h3>Please Register</h3>
                 <div className="my-3">
-                    <label className='mb-2'>Enter your full name</label>
+                    <label className='mb-2'>Your full name</label>
                     <input
                         name="name"
                         type="name"
                         className="form-control"
                         placeholder="Enter name"
+                        required />
+                </div>
+                <div className="my-3">
+                    <label className='mb-2'>Photo URL</label>
+                    <input
+                        name="photoURL"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter URL"
                         required />
                 </div>
                 <div className="my-3">

@@ -7,7 +7,7 @@ const Details = () => {
 
     console.log(detail);
     return (
-        <div className='container  mt-3 mb-2'>
+        <div className='container  mt-3 mb-5'>
             <h3 className='text-center mb-3 fw-bold text-success'>{detail.name}</h3>
 
             <Card className='w-75 mx-auto'>

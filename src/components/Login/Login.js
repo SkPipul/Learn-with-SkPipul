@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../UserContext/UserContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,11 +7,13 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 import { GoogleAuthProvider } from 'firebase/auth';
 import './Login.css'
-import { Toast } from 'bootstrap';
 
 const Login = () => {
     const {signIn, googleSignIn} = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/'
+
     const googleProvider = new GoogleAuthProvider();
 
     const handleSubmit = (event) =>{
@@ -25,10 +27,7 @@ const Login = () => {
             const user = result.user;
             console.log(user);
             form.reset();
-            navigate('/')
-            Toast.success("Log in successfully",{
-                position:"top-center"
-            })
+            navigate(from, { replace: true })
         })
         .catch( error => {
             console.error(error);
@@ -40,14 +39,14 @@ const Login = () => {
         .then( result => {
             const user = result.user;
             console.log(user);
-            navigate('/')
+            navigate(from, { replace: true })
         })
         .catch( error => console.error(error))
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className='w-50 mx-auto my-5 border-0 p-5 rounded shadow'>
+            <div className='w-50 mx-auto my-5 border-0 p-5 rounded shadow bg-light'>
                 <h3>Login</h3>
                 <div className="my-3">
                     <label className='mb-2'>Email address</label>

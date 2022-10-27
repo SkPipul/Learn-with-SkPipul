@@ -4,9 +4,11 @@ import Blog from "../Blog/Blog";
 import CheckOut from "../CheckOut/CheckOut";
 import Courses from "../Courses/Courses";
 import Details from "../Details/Details";
+import FAQ from "../FAQ/FAQ";
 import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const routes = createBrowserRouter([
     {
@@ -38,11 +40,15 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/checkout',
-                element: <CheckOut></CheckOut>
+                element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>
             },
             {
                 path: '/blog',
                 element: <Blog></Blog>
+            },
+            {
+                path: '/faq',
+                element: <FAQ></FAQ>
             }
         ]
     }

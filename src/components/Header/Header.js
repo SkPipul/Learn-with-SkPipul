@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import SideBar from '../SideBar/SideBar';
 import { AuthContext } from '../UserContext/UserContext';
 import { BsFillEmojiSunglassesFill } from "react-icons/bs";
+import { FaUserCircle } from 'react-icons/fa';
+import './Header.css'
 
 const Header = () => {
   const {user, logOut} = useContext(AuthContext);
@@ -19,6 +21,7 @@ const Header = () => {
           <Nav className="mx-auto">
             <Nav.Link><Link className='text-decoration-none text-white' to='/'>Home</Link></Nav.Link>
             <Nav.Link><Link className='text-decoration-none text-white' to='/courses'>Courses</Link></Nav.Link>
+            <Nav.Link><Link className='text-decoration-none text-white' to='/faq'>FAQ</Link></Nav.Link>
 
           </Nav>
           <Nav>
@@ -28,12 +31,19 @@ const Header = () => {
               <Link className='text-decoration-none text-white' to='/login'>Login</Link>}</Nav.Link>
             <Nav.Link><Link className='text-decoration-none text-white' to='/register'>Register</Link></Nav.Link>
             <Nav.Link><Link className='text-decoration-none text-white' to='/blog'>Blog</Link></Nav.Link>
+            <Nav.Link>
+            {
+              user?.photoURL ? <img className='nav-logo rounded-circle' src={user?.photoURL} alt="" />
+              :
+              <Link><FaUserCircle className='fs-3 text-white'></FaUserCircle></Link>
+              }
+            </Nav.Link>
           </Nav>
           <div className='d-lg-none'>
             <SideBar></SideBar>
           </div>
         </Navbar.Collapse>
-        <span>{user?.email}</span>
+        
       </Container>
     </Navbar>
   );
