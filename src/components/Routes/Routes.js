@@ -23,12 +23,12 @@ export const routes = createBrowserRouter([
             {
                 path: '/courses',
                 element: <Courses></Courses>,
-                loader: () => fetch('http://localhost:5000/courses')
+                loader: () => fetch('https://learn-with-skpipul-server.vercel.app/courses')
             },
             {
                 path: '/courses/:id',
                 element: <Details></Details>,
-                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`)
+                loader: ({params}) => fetch(`https://learn-with-skpipul-server.vercel.app/courses/${params.id}`)
             },
             {
                 path: '/login',

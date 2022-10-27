@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../UserContext/UserContext';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
@@ -30,7 +30,10 @@ const Login = () => {
             navigate(from, { replace: true })
         })
         .catch( error => {
-            console.error(error);
+            console.error(error)
+            toast.error( 'Your password is incorrect', {
+                position: "top-center"
+            })
         })
     }
 
