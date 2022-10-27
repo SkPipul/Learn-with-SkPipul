@@ -6,12 +6,14 @@ import { Link } from 'react-router-dom';
 import SideBar from '../SideBar/SideBar';
 import { AuthContext } from '../UserContext/UserContext';
 import { BsFillEmojiSunglassesFill } from "react-icons/bs";
-import { FaUserCircle } from 'react-icons/fa';
 import './Header.css'
+import Form from 'react-bootstrap/Form';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 const Header = () => {
-  const {user, logOut} = useContext(AuthContext);
-  
+  const { user, logOut } = useContext(AuthContext);
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -22,28 +24,36 @@ const Header = () => {
             <Nav.Link><Link className='text-decoration-none text-white' to='/'>Home</Link></Nav.Link>
             <Nav.Link><Link className='text-decoration-none text-white' to='/courses'>Courses</Link></Nav.Link>
             <Nav.Link><Link className='text-decoration-none text-white' to='/faq'>FAQ</Link></Nav.Link>
+            <Nav.Link><Link className='text-decoration-none text-white' to='/blog'>Blog</Link></Nav.Link>
 
           </Nav>
           <Nav>
-            <Nav.Link>{
-              user?.uid ? <Link onClick={logOut} className='text-decoration-none text-white'>Logout</Link>
-              :
-              <Link className='text-decoration-none text-white' to='/login'>Login</Link>}</Nav.Link>
             <Nav.Link><Link className='text-decoration-none text-white' to='/register'>Register</Link></Nav.Link>
-            <Nav.Link><Link className='text-decoration-none text-white' to='/blog'>Blog</Link></Nav.Link>
+            <Nav.Link>{
+              user?.uid ? <> <Link onClick={logOut} className='text-decoration-none text-white'>Logout</Link>
+                <> <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-disabled">{user.displayName}</Tooltip>}>
+                  <img className='nav-logo rounded-circle mx-2' src={user?.photoURL} alt="" />
+                </OverlayTrigger>
+                </>
+              </>
+
+                :
+                <Link className='text-decoration-none text-white' to='/login'>Login</Link>}</Nav.Link>
             <Nav.Link>
-            {
-              user?.photoURL ? <img className='nav-logo rounded-circle' src={user?.photoURL} alt="" />
-              :
-              <Link><FaUserCircle className='fs-3 text-white'></FaUserCircle></Link>
-              }
+              
             </Nav.Link>
+            <Form>
+              <Form.Check className='ms-3 mt-2'
+                type="switch"
+                id="custom-switch"
+              />
+            </Form>
           </Nav>
           <div className='d-lg-none'>
             <SideBar></SideBar>
           </div>
         </Navbar.Collapse>
-        
+
       </Container>
     </Navbar>
   );

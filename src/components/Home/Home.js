@@ -7,7 +7,7 @@ import image3 from '../../assets/image3.avif';
 const Home = () => {
     return (
         <div>
-            <h1 className='text-danger text-center'>
+            <h1 className='text-success text-center fw-bold'>
                 Study is important for us. We able to know and gain our skills <br /> by reading and practicing every types of things.
             </h1>
             <Carousel className='container img-fluid w-75 my-5' slide={false}>
