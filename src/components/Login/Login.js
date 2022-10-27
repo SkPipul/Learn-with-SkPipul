@@ -5,16 +5,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import './Login.css'
 
 const Login = () => {
-    const {signIn, googleSignIn} = useContext(AuthContext);
+    const {signIn, googleSignIn, githubSignIn} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/'
 
     const googleProvider = new GoogleAuthProvider();
+
+    const githubProvider = new GithubAuthProvider();
 
     const handleSubmit = (event) =>{
         event.preventDefault();
@@ -41,6 +43,16 @@ const Login = () => {
         googleSignIn(googleProvider)
         .then( result => {
             const user = result.user;
+            console.log(user);
+            navigate(from, { replace: true })
+        })
+        .catch( error => console.error(error))
+    }
+
+    const handleGitHub = () => {
+        githubSignIn(githubProvider)
+        .then( res => {
+            const user = res.user;
             console.log(user);
             navigate(from, { replace: true })
         })
@@ -88,7 +100,7 @@ const Login = () => {
                 </div>
                 <div className='my-3'>
                     <FcGoogle onClick={handleGoogle} className='fs-2 me-4 google-icon'></FcGoogle>
-                    <FaGithub className='fs-2 github-icon'></FaGithub>
+                    <FaGithub onClick={handleGitHub} className='fs-2 github-icon'></FaGithub>
                 </div>
                 <p className="text-right">
                    New User? <Link to='/register'>Please Register</Link>
