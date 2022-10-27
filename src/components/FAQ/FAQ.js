@@ -4,7 +4,7 @@ import { BsPlusLg } from "react-icons/bs";
 
 const FAQ = () => {
     return (
-        <div className='container w-50 my-5 bg-success rounded p-5'>
+        <div className='container w-75 my-5 bg-success rounded p-5'>
             <ListGroup>
                 <ListGroup.Item className='mb-3'><h5><BsPlusLg></BsPlusLg>  এই কোর্স কাদের জন্য?</h5></ListGroup.Item>
                 <ListGroup.Item className='mb-3'><h5><BsPlusLg></BsPlusLg>  এই কোর্স শুরুর পুর্বে আমার কি কি অভিজ্ঞতা নিয়ে রাখা ভালো?</h5></ListGroup.Item>
